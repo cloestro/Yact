@@ -137,6 +137,8 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
 
         dropdown1= (Spinner)findViewById(R.id.spinner1);
         dropdown2= (Spinner)findViewById(R.id.spinner2);
+        EditText editText = (EditText)findViewById(R.id.editText1);
+        editText.setText("1");
 
         dropdown1.setOnItemSelectedListener(this);
         dropdown2.setOnItemSelectedListener(this);
@@ -148,6 +150,9 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
 
         dropdown1.setAdapter(adapter);
         dropdown2.setAdapter(adapter);
+        dropdown1.setSelection(0);
+        dropdown1.setSelection(1);
+
 
         TextView textStatus = (TextView) findViewById(R.id.textViewStatus);
 
