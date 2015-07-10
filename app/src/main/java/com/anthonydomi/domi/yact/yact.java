@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
 
     private Spinner dropdown1;
     private Spinner dropdown2;
+    private EditText text1;
 
 
 
@@ -100,7 +102,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
 
         protected void onPostExecute(Map<String, Double> dictres) {
 
-            EditText text1 = (EditText)findViewById(R.id.editText1);
+            //EditText text1 = (EditText)findViewById(R.id.editText1);
             TextView text2 = (TextView)findViewById(R.id.textView);
 
             String curr1 = dropdown1.getSelectedItem().toString();
@@ -119,12 +121,20 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
                 textStatus.setText("No connection available");
             }
 
+            InputMethodManager in = (InputMethodManager) getSystemService(
+                    Context.INPUT_METHOD_SERVICE);
+            in.hideSoftInputFromWindow(text1.getApplicationWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+
+            text1.clearFocus();
+
         }
     }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int cnt = -1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yact);
 
@@ -135,10 +145,12 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
 
 
 
-        dropdown1= (Spinner)findViewById(R.id.spinner1);
-        dropdown2= (Spinner)findViewById(R.id.spinner2);
-        EditText editText = (EditText)findViewById(R.id.editText1);
-        editText.setText("1");
+        dropdown1 = (Spinner)findViewById(R.id.spinner1);
+        dropdown2 = (Spinner)findViewById(R.id.spinner2);
+        text1 = (EditText)findViewById(R.id.editText1);
+        text1.setSelectAllOnFocus(true);
+
+        text1.setText("1");
 
         dropdown1.setOnItemSelectedListener(this);
         dropdown2.setOnItemSelectedListener(this);
@@ -148,10 +160,20 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
                 R.array.currencies_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        cnt = adapter.getCount();
+
         dropdown1.setAdapter(adapter);
         dropdown2.setAdapter(adapter);
-        dropdown1.setSelection(0);
-        dropdown1.setSelection(1);
+        if ( cnt > 4)
+        {
+            dropdown1.setSelection(0);
+            dropdown2.setSelection(4);
+        }
+        else if ( cnt > 1)
+        {
+            dropdown1.setSelection(0);
+        }
+
 
 
         TextView textStatus = (TextView) findViewById(R.id.textViewStatus);
@@ -166,7 +188,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
             textStatus.setText("");
         }
 
-        EditText editText1 = (EditText)findViewById(R.id.editText1);
+        //EditText editText1 = (EditText)findViewById(R.id.editText1);
 
 
         String curr1 = dropdown1.getSelectedItem().toString();
@@ -176,8 +198,15 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
 
 
 
+        text1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text1.selectAll();
+            }
+        });
 
-        editText1.setOnKeyListener(new View.OnKeyListener() {
+
+        text1.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
                 //If the keyevent is a key-down event on the "enter" button
                 if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) &&
@@ -185,6 +214,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
                     String curr1 = dropdown1.getSelectedItem().toString();
                     String curr2 = dropdown2.getSelectedItem().toString();
                     new GetRateTask().execute(getUrl(curr1, curr2));
+
                     return true;
                 }
                 return false;
@@ -212,7 +242,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             Context context = getApplicationContext();
-            CharSequence text = "Version 1.0";
+            CharSequence text = "Version 1.0.1";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
