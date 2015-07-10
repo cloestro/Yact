@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
     private Spinner dropdown1;
     private Spinner dropdown2;
     private EditText text1;
+    private Button buttonSwap;
 
 
 
@@ -142,9 +144,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
 
-
-
-
+        buttonSwap = (Button)findViewById(R.id.button);
         dropdown1 = (Spinner)findViewById(R.id.spinner1);
         dropdown2 = (Spinner)findViewById(R.id.spinner2);
         text1 = (EditText)findViewById(R.id.editText1);
@@ -196,7 +196,18 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
 
         new GetRateTask().execute(getUrl(curr1, curr2));
 
-
+        buttonSwap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i1 = dropdown1.getSelectedItemPosition();
+                int i2 = dropdown2.getSelectedItemPosition();
+                dropdown1.setSelection(i2);
+                dropdown2.setSelection(i1);
+                String curr1 = dropdown1.getSelectedItem().toString();
+                String curr2 = dropdown2.getSelectedItem().toString();
+                new GetRateTask().execute(getUrl(curr1, curr2));
+            }
+        });
 
         text1.setOnClickListener(new View.OnClickListener() {
             @Override
