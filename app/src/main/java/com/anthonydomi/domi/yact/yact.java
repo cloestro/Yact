@@ -5,8 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,14 +31,11 @@ import java.util.Map;
 
 
 
-public class yact extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+public class yact extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Spinner dropdown1;
     private Spinner dropdown2;
     private EditText text1;
-    private Button buttonSwap;
-
-
 
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
@@ -58,16 +55,16 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
     private class GetRateTask extends AsyncTask<String, String, Map<String, Double>> {
         TextView textStatus = (TextView) findViewById(R.id.textViewStatus);
 
-        protected Map<String, Double> doInBackground(String... surls) {
+        protected Map<String, Double> doInBackground(String... sUrls) {
             URL url;
-            Map dictres = new HashMap();
+            Map<String, Double> dictRes = new HashMap<>();
 
             try {
                 // get URL content
 
                 publishProgress("Connecting to server");
 
-                url = new URL(surls[0]);
+                url = new URL(sUrls[0]);
                 URLConnection conn = url.openConnection();
                 publishProgress("Reading rate changes");
 
@@ -78,7 +75,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
                 String inputLine;
                 while ((inputLine = br.readLine()) != null) {
                     String[] parts = inputLine.split(",");
-                    dictres.put(parts[0].replace("\"", ""), Double.parseDouble(parts[2]));
+                    dictRes.put(parts[0].replace("\"", ""), Double.parseDouble(parts[2]));
 
                 }
                 br.close();
@@ -92,7 +89,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
             }
 
 
-            return dictres;
+            return dictRes;
 
         }
 
@@ -102,7 +99,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
         }
 
 
-        protected void onPostExecute(Map<String, Double> dictres) {
+        protected void onPostExecute(Map<String, Double> dictRes) {
 
             //EditText text1 = (EditText)findViewById(R.id.editText1);
             TextView text2 = (TextView)findViewById(R.id.textView);
@@ -114,7 +111,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
             if ( !sval.isEmpty())
             {
                 Double val = Double.parseDouble(sval);
-                text2.setText(String.format("%.2f", val * getrate(curr1, curr2, dictres)));
+                text2.setText(String.format("%.2f", val * getRate(curr1, curr2, dictRes)));
 
             }
 
@@ -136,15 +133,18 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        int cnt = -1;
+        int cnt;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yact);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.drawable.logo);
+        if ( actionBar != null) {
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setIcon(R.drawable.logo);
+        }
 
-        buttonSwap = (Button)findViewById(R.id.button);
+        FloatingActionButton buttonSwap;
+        buttonSwap = (FloatingActionButton)findViewById(R.id.button);
         dropdown1 = (Spinner)findViewById(R.id.spinner1);
         dropdown2 = (Spinner)findViewById(R.id.spinner2);
         text1 = (EditText)findViewById(R.id.editText1);
@@ -188,9 +188,6 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
             textStatus.setText("");
         }
 
-        //EditText editText1 = (EditText)findViewById(R.id.editText1);
-
-
         String curr1 = dropdown1.getSelectedItem().toString();
         String curr2 = dropdown2.getSelectedItem().toString();
 
@@ -219,7 +216,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
 
         text1.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
+                //If the key event is a key-down event on the "enter" button
                 if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     String curr1 = dropdown1.getSelectedItem().toString();
@@ -253,10 +250,9 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             Context context = getApplicationContext();
-            CharSequence text = "Version 1.0.1";
             int duration = Toast.LENGTH_SHORT;
 
-            Toast toast = Toast.makeText(context, text, duration);
+            Toast toast = Toast.makeText(context,  BuildConfig.VERSION_NAME, duration);
             toast.show();
             return true;
         }
@@ -272,7 +268,7 @@ public class yact extends ActionBarActivity implements AdapterView.OnItemSelecte
     }
 
 
-    public Double getrate(String curr1, String curr2, Map<String, Double> currencies){
+    public Double getRate(String curr1, String curr2, Map<String, Double> currencies){
 
         Double k1 = 1.0;
         Double k2 = 0.0;
