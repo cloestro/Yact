@@ -26,6 +26,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,7 +89,6 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
                 publishProgress("I/O issues");
             }
 
-
             return dictRes;
 
         }
@@ -103,29 +103,20 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
 
             //EditText text1 = (EditText)findViewById(R.id.editText1);
             TextView text2 = (TextView)findViewById(R.id.textView);
-
             String curr1 = dropdown1.getSelectedItem().toString();
             String curr2 = dropdown2.getSelectedItem().toString();
 
-            String sval = text1.getText().toString();
-            if ( !sval.isEmpty())
-            {
-                Double val = Double.parseDouble(sval);
-                text2.setText(String.format("%.2f", val * getRate(curr1, curr2, dictRes)));
+            NumberFormat format = NumberFormat.getInstance();
+            format.setMaximumFractionDigits(2);
+            Double val;
 
-            }
+            val = getTextAndSetFormat();
+            text2.setText(format.format(val * getRate(curr1, curr2, dictRes)));
 
             if (!isNetworkAvailable())
             {
                 textStatus.setText("No connection available");
             }
-
-            InputMethodManager in = (InputMethodManager) getSystemService(
-                    Context.INPUT_METHOD_SERVICE);
-            in.hideSoftInputFromWindow(text1.getApplicationWindowToken(),
-                    InputMethodManager.HIDE_NOT_ALWAYS);
-
-            text1.clearFocus();
 
         }
     }
@@ -221,6 +212,14 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     String curr1 = dropdown1.getSelectedItem().toString();
                     String curr2 = dropdown2.getSelectedItem().toString();
+
+                    InputMethodManager in = (InputMethodManager) getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(text1.getApplicationWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    text1.clearFocus();
+                    getTextAndSetFormat();
+
                     new GetRateTask().execute(getUrl(curr1, curr2));
 
                     return true;
@@ -273,6 +272,9 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
         Double k1 = 1.0;
         Double k2 = 0.0;
 
+        if (curr1.equals(curr2))
+            return 1.0;
+
         for(String key: currencies.keySet())
         {
             if ( key.endsWith("/" + curr1))
@@ -287,6 +289,33 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
         return k2 / k1;
 
     }
+
+    private Double getTextAndSetFormat(){
+
+        NumberFormat format = NumberFormat.getInstance();
+        format.setMaximumFractionDigits(2);
+        Double val;
+        String sVal;
+
+
+        try{
+            val = format.parse(text1.getText().toString()).doubleValue();
+        }
+        catch (java.text.ParseException pE)
+        {
+            sVal = text1.getText().toString();
+            if ( !sVal.isEmpty()) {
+                val = Double.parseDouble(sVal);
+            }
+            else {
+                val = 0.0;
+            }
+        }
+
+        text1.setText(format.format(val));
+        return val;
+    }
+
 
 
     private boolean isNetworkAvailable() {
