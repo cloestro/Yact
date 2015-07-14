@@ -89,6 +89,13 @@
                 android:layout_toLeftOf="@+id/spinner1"
                 android:layout_toStartOf="@+id/spinner1"
                 android:gravity="end" />
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@+string/manYen"
+                android:id="@+id/switchManYen"
+                android:layout_below="@+id/textView"
+                android:layout_marginTop="30dp" />
 
         </RelativeLayout>
         <android.support.design.widget.FloatingActionButton

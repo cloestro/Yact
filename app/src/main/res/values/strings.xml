@@ -6,6 +6,7 @@
     <string name="action_about">About</string>
     <string name="title">Yet another currency tool</string>
     <string name="swap">Swap currencies</string>
+    <string name="manYen">万円</string>
 
     <string-array name="currencies_array">
         <item>EUR</item>
