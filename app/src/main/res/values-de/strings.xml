@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">YACT</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_about">Impressum</string>
+    <string name="title">Noch ein anderes Währungswerkzeug</string>
+    <string name="swap">Währung tauschen</string>
+    <string name="manYen">万円</string>
+    <string name="noConnection">Keine Verbindung verfügbar</string>
+    <string name="connectingServer">Verbindung zum Server</string>
+    <string name="reading_rates">Lesen der Währungsraten</string>
+    <string name="done">Erledigt</string>
+    <string name="io_issues">Eingangs-/Ausgangsprobleme</string>
+    <string name="connection_issues">Verbindungsprobleme</string>
+    <string-array name="currencies_array">
+        <item>EUR</item>
+        <item>USD</item>
+        <item>GBP</item>
+        <item>CHF</item>
+        <item>JPY</item>
+        <item>CNY</item>
+        <item>KRW</item>
+        <item>RUB</item>
+    </string-array>
+
+    <string name="hello_world">Hello world!</string>
+
+</resources>

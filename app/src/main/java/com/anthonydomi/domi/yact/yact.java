@@ -101,7 +101,7 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
         TextView textStatus = (TextView) findViewById(R.id.textViewStatus);
 
         if (!isNetworkAvailable()) {
-            textStatus.setText("No connection available");
+            textStatus.setText(R.string.noConnection);
             return;
         } else {
             textStatus.setText("");
@@ -269,11 +269,11 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
             try {
                 // get URL content
 
-                publishProgress("Connecting to server");
+                publishProgress(getResources().getString(R.string.connectingServer));
 
                 url = new URL(sUrls[0]);
                 URLConnection conn = url.openConnection();
-                publishProgress("Reading rate changes");
+                publishProgress(getResources().getString(R.string.reading_rates));
 
                 // open the stream and put it into BufferedReader
                 BufferedReader br = new BufferedReader(
@@ -286,13 +286,13 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
 
                 }
                 br.close();
-                publishProgress("done");
+                publishProgress(getResources().getString(R.string.done));
             } catch (MalformedURLException e) {
-                publishProgress("Connection issues");
+                publishProgress(getResources().getString(R.string.connection_issues));
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-                publishProgress("I/O issues");
+                publishProgress(getResources().getString(R.string.io_issues));
             }
 
             return dictRes;
@@ -328,7 +328,7 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
 
 
             if (!isNetworkAvailable()) {
-                textStatus.setText("No connection available");
+                textStatus.setText(getResources().getString(R.string.noConnection));
             }
 
         }

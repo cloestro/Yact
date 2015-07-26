@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">YACT</string>
+    <string name="action_settings">セッティング</string>
+    <string name="action_about">約</string>
+    <string name="title">さらに別の通貨ツール</string>
+    <string name="swap">スワップ通貨</string>
+    <string name="manYen">万円</string>
+    <string name="noConnection">利用可能な接続がありません</string>
+    <string name="connectingServer">サーバーへの接続</string>
+    <string name="reading_rates">変化率を取得します</string>
+    <string name="done">完了しました</string>
+    <string name="io_issues">入出力問題</string>
+    <string name="connection_issues">接続の問題</string>
+    <string-array name="currencies_array">
+        <item>EUR</item>
+        <item>USD</item>
+        <item>GBP</item>
+        <item>CHF</item>
+        <item>JPY</item>
+        <item>CNY</item>
+        <item>KRW</item>
+        <item>RUB</item>
+    </string-array>
+
+    <string name="hello_world">Hello world!</string>
+
+</resources>

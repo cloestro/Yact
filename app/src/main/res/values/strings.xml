@@ -7,7 +7,12 @@
     <string name="title">Yet another currency tool</string>
     <string name="swap">Swap currencies</string>
     <string name="manYen">万円</string>
-
+    <string name="noConnection">No connection available</string>
+    <string name="connectingServer">Connecting to server</string>
+    <string name="reading_rates">Getting change rates</string>
+    <string name="done">done</string>
+    <string name="io_issues">I/O issues</string>
+    <string name="connection_issues">Connection issues</string>
     <string-array name="currencies_array">
         <item>EUR</item>
         <item>USD</item>
