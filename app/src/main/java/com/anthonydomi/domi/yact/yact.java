@@ -313,6 +313,7 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
             String curr2 = dropdown2.getSelectedItem().toString();
 
             NumberFormat format = NumberFormat.getInstance();
+            format.setMinimumFractionDigits(2);
             format.setMaximumFractionDigits(2);
             Double val;
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="3dp"
+        android:layout_gravity="center"
+        card_view:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:focusableInTouchMode="true">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@+string/title"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/textViewTitle" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:minEms="9"
+                android:id="@+id/editText1"
+                android:layout_below="@+id/textViewTitle"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:gravity="end" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minEms="3"
+                android:id="@+id/spinner1"
+                android:layout_alignBottom="@+id/editText1"
+                android:layout_alignBaseline="@+id/editText1"
+                android:layout_toRightOf="@+id/editText1"
+
+                android:layout_toEndOf="@+id/editText1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:minEms="9"
+                android:id="@+id/textView"
+                android:layout_below="@+id/editText1"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:gravity="end" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minEms="3"
+                android:id="@+id/spinner2"
+                android:layout_alignBottom="@+id/textView"
+                android:layout_toRightOf="@+id/textView"
+                android:layout_toEndOf="@+id/textView" />
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@+string/manYen"
+                android:id="@+id/switchManYen"
+                android:layout_toRightOf="@+id/spinner2"
+                android:layout_toEndOf="@+id/spinner2"
+                android:layout_marginTop="90dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textViewStatus"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="1dp"
+                android:text="   " />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/swap"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        app:elevation="5dp"
+        app:borderWidth="0dp"
+        app:layout_anchorGravity="bottom|right|end"/>
+
+
+</android.support.design.widget.CoordinatorLayout>
