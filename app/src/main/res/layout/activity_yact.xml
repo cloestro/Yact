@@ -25,7 +25,7 @@
             android:focusableInTouchMode="true">
 
             <TextView
-                android:text="@+string/title"
+                android:text="@string/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -92,7 +92,7 @@
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@+string/manYen"
+                android:text="@string/manYen"
                 android:id="@+id/switchManYen"
                 android:layout_below="@+id/textView"
                 android:layout_marginTop="30dp" />
