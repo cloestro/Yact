@@ -13,6 +13,7 @@
     <string name="done">done</string>
     <string name="io_issues">I/O issues</string>
     <string name="connection_issues">Connection issues</string>
+    <string name="empty">    </string>
     <string-array name="currencies_array">
         <item>EUR</item>
         <item>USD</item>
