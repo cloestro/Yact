@@ -291,6 +291,7 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
                 publishProgress(getResources().getString(R.string.connection_issues));
                 e.printStackTrace();
             } catch (IOException e) {
+
                 e.printStackTrace();
                 publishProgress(getResources().getString(R.string.io_issues));
             }
