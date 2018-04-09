@@ -13,6 +13,7 @@
     <string name="done">完了しました</string>
     <string name="io_issues">入出力問題</string>
     <string name="connection_issues">接続の問題</string>
+    <string name="menu_refresh">Refresh rates</string>
     <string-array name="currencies_array">
         <item>EUR</item>
         <item>USD</item>

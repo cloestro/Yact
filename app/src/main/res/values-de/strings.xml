@@ -13,6 +13,7 @@
     <string name="done">Erledigt</string>
     <string name="io_issues">Eingangs-/Ausgangsprobleme</string>
     <string name="connection_issues">Verbindungsprobleme</string>
+    <string name="menu_refresh">Raten aktualisieren</string>
     <string-array name="currencies_array">
         <item>EUR</item>
         <item>USD</item>

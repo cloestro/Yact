@@ -13,6 +13,7 @@
     <string name="done">Fini</string>
     <string name="io_issues">Problème d\'entrée sortie</string>
     <string name="connection_issues">Problème de connexion</string>
+    <string name="menu_refresh">Rafraichissement des taux</string>
     <string-array name="currencies_array">
         <item>EUR</item>
         <item>USD</item>
