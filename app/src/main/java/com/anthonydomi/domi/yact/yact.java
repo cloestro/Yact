@@ -51,7 +51,7 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
     private Spinner dropdown2;
     private EditText text1;
     private Switch switchManYen;
-    private String ratesURL = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
+    private String ratesURL = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
 
     private SwipeRefreshLayout mySwipeRefreshLayout;
 
