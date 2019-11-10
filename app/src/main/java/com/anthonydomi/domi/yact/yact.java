@@ -37,6 +37,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -262,9 +264,12 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
         Double val;
 
         val = getTextAndSetFormat();
-        if (curr1.equals("JPY") && switchManYen.isChecked()) {
+        if ((curr1.equals("JPY") && curr2.equals("CNY")) ||
+                (curr1.equals("CNY") && curr2.equals("JPY"))) {
+            text2.setText(format.format(val * getRateEU(curr1, curr2, dictRates)));
+        }else if ((curr1.equals("JPY") || curr1.equals("CNY")) && switchManYen.isChecked()) {
             text2.setText(format.format(1.0e4 * val * getRateEU(curr1, curr2, dictRates)));
-        } else if (curr2.equals("JPY") && switchManYen.isChecked()) {
+        } else if ((curr2.equals("JPY") || curr2.equals("CNY")) && switchManYen.isChecked()) {
             text2.setText(format.format(1.0e-4 * val * getRateEU(curr1, curr2, dictRates)));
         } else {
             text2.setText(format.format(val * getRateEU(curr1, curr2, dictRates)));
@@ -350,8 +355,17 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
     }
 
     private void updateManYen(String curr1, String curr2) {
-        if (curr1.equals("JPY") || curr2.equals("JPY")) {
+        if ((curr1.equals("JPY") || curr2.equals("JPY") ||
+                curr1.equals("CNY") || curr2.equals("CNY")) &&
+                (!(curr1.equals("JPY") && curr2.equals("CNY")) &&
+                        !(curr1.equals("CNY") && curr2.equals("JPY")))){
             switchManYen.setVisibility(View.VISIBLE);
+            if (curr1.equals("JPY") || curr2.equals("JPY")){
+                switchManYen.setText(R.string.manYen);
+            }
+            if (curr1.equals("CNY") || curr2.equals("CNY")){
+                switchManYen.setText(R.string.manYuan);
+            }
         } else {
             switchManYen.setVisibility(View.GONE);
         }
@@ -364,9 +378,14 @@ public class yact extends AppCompatActivity implements AdapterView.OnItemSelecte
             //calendar.setTimeInMillis(timestamp * 1000);
             calendar.setTimeInMillis(timestamp);
             calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
+            //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date currenTimeZone = (Date) calendar.getTime();
-            return sdf.format(currenTimeZone);
+            Date currentTimeZone = (Date) calendar.getTime();
+        LocalDateTime triggerTime =
+                LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp),
+                        TimeZone.getDefault().toZoneId());
+
+        return sdf.format(currentTimeZone);
     }
 
     private boolean isNetworkAvailable() {

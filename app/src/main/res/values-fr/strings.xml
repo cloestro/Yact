@@ -7,6 +7,7 @@
     <string name="title">Encore un outil de devises</string>
     <string name="swap">Échange les devises</string>
     <string name="manYen">万円</string>
+    <string name="manYuan">万元</string>
     <string name="noConnection">Aucune connexion disponible</string>
     <string name="connectingServer">Connexion au serveur</string>
     <string name="reading_rates">Lecture des rapport de change</string>

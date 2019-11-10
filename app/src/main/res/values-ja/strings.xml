@@ -7,6 +7,7 @@
     <string name="title">さらに別の通貨ツール</string>
     <string name="swap">スワップ通貨</string>
     <string name="manYen">万円</string>
+    <string name="manYuan">万元</string>
     <string name="noConnection">利用可能な接続がありません</string>
     <string name="connectingServer">サーバーへの接続</string>
     <string name="reading_rates">変化率を取得します</string>
